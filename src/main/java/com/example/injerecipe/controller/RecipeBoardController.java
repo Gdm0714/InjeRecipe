@@ -22,7 +22,7 @@ public class RecipeBoardController {
     @Operation(summary = "레시피 업로드")
     @PostMapping(name = "/write", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ApiResponse registerRecipe(@ModelAttribute RecipeBoardRequest request, @AuthenticationPrincipal User user) throws IOException {
-        return ApiResponse.success(recipeBoardService.registerRecipe(request, new Long(user.getUsername())));
+        return ApiResponse.success(recipeBoardService.registerRecipe(request, Long.parseLong(user.getUsername())));
     }
 
     @Operation(summary = "레시피 다중 검색")
@@ -40,7 +40,7 @@ public class RecipeBoardController {
     @Operation(summary = "멤버별 레시피 전체 조회")
     @PostMapping("/member/posts")
     public ApiResponse getMemberPosts(@AuthenticationPrincipal User user){
-        return ApiResponse.success(recipeBoardService.getMemberPosts(new Long(user.getUsername())));
+        return ApiResponse.success(recipeBoardService.getMemberPosts(Long.parseLong(user.getUsername())));
     }
     @Operation(summary = "작성된 전체 레시피 조회")
     @PostMapping("/posts")

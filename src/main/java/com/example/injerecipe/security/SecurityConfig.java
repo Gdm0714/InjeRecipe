@@ -44,7 +44,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
                 //.headers(headers -> headers.frameOptions().sameOrigin())	// H2 콘솔 사용을 위한 설정
                 .authorizeHttpRequests(requests ->
                         requests.requestMatchers(allowedUrls).permitAll()

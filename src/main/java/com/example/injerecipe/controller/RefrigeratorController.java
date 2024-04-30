@@ -19,12 +19,12 @@ public class RefrigeratorController {
     @Operation(summary = "재료 등록")
     @PostMapping("/ingredient")
     public ApiResponse addIngredientToRefrigerator(@RequestBody RefrigeratorRequest refrigeratorRequest, @AuthenticationPrincipal User user) {
-        return ApiResponse.success(refrigeratorService.addIngredientToRefrigerator(refrigeratorRequest, new Long(user.getUsername())));
+        return ApiResponse.success(refrigeratorService.addIngredientToRefrigerator(refrigeratorRequest, Long.parseLong(user.getUsername())));
     }
 
     @Operation(summary = "전체 재료 조회")
     @PostMapping("/ingredients")
     public ApiResponse getIngredients(@AuthenticationPrincipal User user) {
-        return ApiResponse.success(refrigeratorService.getItem(new Long(user.getUsername())));
+        return ApiResponse.success(refrigeratorService.getItem(Long.parseLong(user.getUsername())));
     }
 }
