@@ -51,7 +51,7 @@ public class MemberService {
         Member member = memberRepository.findByAccount(request.account()) // 계정으로 회원을 찾음
                 .filter(it -> passwordEncoder.matches(request.password(), it.getPassword())) // 비밀번호가 일치하는지 확인
                 .orElseThrow(() -> new IllegalArgumentException("아이디 또는 비밀번호가 일치하지 않습니다.")); // 회원이 없거나 비밀번호가 일치하지 않으면 예외 발생
-        String token = tokenProvider.createToken(String.format("%s:%s", member.getId(), member.getRole()), member.getAccount()); // 토큰을 생성
+        String token = tokenProvider.createToken(String.format("%s:%s", member.getId(), member.getRole())); // 토큰을 생성
         return new SignInResponse(member.getName(), member.getRole(), token); // 로그인 응답을 반환
     }
 }

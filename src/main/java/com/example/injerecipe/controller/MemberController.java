@@ -30,6 +30,5 @@ public class MemberController {
     @PostMapping("/sign-in")
     public ApiResponse signIn(@RequestBody SignInRequest request) {
         return ApiResponse.success(memberService.signIn(request));
-
     }
 }
