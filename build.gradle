@@ -1,0 +1,77 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.1'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.16.1'
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation('commons-io:commons-io:2.11.0')
+
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-crypto:5.7.1'
+    testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // Mongodb
+    //implementation ('org.springframework.boot:spring-boot-starter-data-mongodb')
+
+    // PostgreSQL
+    runtimeOnly 'org.postgresql:postgresql'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.23'
+
+    // Swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+
+    // Jwt
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
+    implementation 'com.auth0:java-jwt:4.2.1'
+
+    // Json
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
+    // Chat GPT
+    implementation 'io.github.flashvayne:chatgpt-spring-boot-starter:1.0.0'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+    // Amazon S3
+    implementation group: 'io.awspring.cloud', name: 'spring-cloud-starter-aws', version: '2.4.0'
+    implementation group: 'io.awspring.cloud', name: 'spring-cloud-starter-aws-secrets-manager-config', version: '2.4.0'
+
+
+
+
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
