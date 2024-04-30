@@ -30,17 +30,13 @@ jobs:
     - name: Grant execute permission to Gradle Wrapper script
       run: chmod +x ./gradlew
 
-    - name: Configure PostgreSQL
-      env:
-        POSTGRES_DB: postgres
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: 0714
-        POSTGRES_HOST: localhost
-        POSTGRES_PORT: 5432
-      run: |
-        echo "spring.datasource.url=jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}" >> ./src/main/resources/application.properties
-        echo "spring.datasource.username=${POSTGRES_USER}" >> ./src/main/resources/application.properties
-        echo "spring.datasource.password=${POSTGRES_PASSWORD}" >> ./src/main/resources/application.properties
+    - name: Set up PostgreSQL
+      uses: einaregilsson/setup-postgres@v1
+      with:
+        postgres-version: '13'
+        postgres-user: ${{ secrets.DB_USER }}
+        postgres-password: ${{ secrets.DB_PASSWORD }}
+        postgres-db: ${{ secrets.DB_NAME }}
       
 
 
