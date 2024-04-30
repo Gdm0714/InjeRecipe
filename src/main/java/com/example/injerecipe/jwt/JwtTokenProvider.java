@@ -25,9 +25,8 @@ public class JwtTokenProvider {
         this.issuer = issuer;
     }
 
-    public String createToken(String userSpecification, String account) {
+    public String createToken(String userSpecification) {
 
-        //Claims claims = Jwts.claims();
         //claims.put("account", account);
 
         return Jwts.builder()
@@ -39,13 +38,6 @@ public class JwtTokenProvider {
                 .compact(); // JWT 토큰 생성
     }
 
-    public String getAccount(String token){
-        return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().getSubject();
-    }
-
-    private static Claims extractClaims(String token, String secretKey) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
-    }
 
     public String validateTokenAndGetSubject(String token){
         return Jwts.parserBuilder()
